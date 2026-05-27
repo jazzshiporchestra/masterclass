@@ -1,164 +1,575 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>爵士指揮大師班｜MileSpace × 陳含章 博士 × 爵序大樂團</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      background-color: #111;
-      background-image: url('https://i.postimg.cc/kMQySnYR/jazz-music-festival-2.png');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: top center;
-      background-attachment: scroll;
-      color: #f5f5f5;
-      line-height: 1.7;
-      scroll-behavior: smooth;
-    }
-    header {
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    header h1 {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1.5rem;
-      font-size: 2rem;
-      border-radius: 12px;
-      animation: fadeInDown 1.5s ease both;
-    }
-    .section {
-      max-width: 960px;
-      margin: 3rem auto;
-      padding: 2rem 1rem;
-      background-color: rgba(0, 0, 0, 0.85);
-      border-radius: 12px;
-      animation: fadeInUp 1.2s ease both;
-    }
-    .highlight {
-      color: #FFD700;
-      font-weight: bold;
-    }
-    .btn {
-      display: inline-block;
-      background-color: #FFD700;
-      color: #000;
-      padding: 0.8rem 1.5rem;
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-    .countdown {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      color: #FFD700;
-    }
-    .map {
-      margin: 3rem auto;
-      max-width: 960px;
-      padding: 1rem;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .map iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 8px;
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.5rem;
-        padding: 1rem;
-      }
-      .section {
-        padding: 1.5rem 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成為我們的神隊友！一起吹響台中的爵士夢 🎷</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Cute Handwriting vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            background-color: #FFFDF0; /* Warm light yellow custard background */
+            background-image: radial-gradient(#FCE4EC 1.5px, transparent 1.5px), radial-gradient(#FCE4EC 1.5px, #FFFDF0 1.5px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Handwritten doodle card effect */
+        .scrappy-card {
+            border: 4px solid #4E342E;
+            box-shadow: 6px 6px 0px 0px #4E342E;
+            border-radius: 24px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .scrappy-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 10px 10px 0px 0px #4E342E;
+        }
+
+        /* Q-bounce effect for cute buttons */
+        .btn-bounce {
+            border: 3px solid #4E342E;
+            box-shadow: 4px 4px 0px 0px #4E342E;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .btn-bounce:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #4E342E;
+        }
+
+        .btn-bounce:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px 0px #4E342E;
+        }
+
+        /* Floating Note Animation in Background */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-note {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 1;
+            font-size: 24px;
+            animation: floatUp 12s linear infinite;
+        }
+
+        /* Custom scrollbar for cute look */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFDE7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #FFB74D;
+            border-radius: 10px;
+            border: 3px solid #FFFDE7;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>爵士指揮大師班｜MileSpace × 陳含章 博士 × 爵序大樂團</h1>
-  </header>
+<body class="overflow-x-hidden text-[#4E342E] relative min-h-screen">
 
-  <div class="section">
-    <div class="countdown" id="countdown">距離活動開始倒數：計算中…</div>
+    <!-- Floating background decorative notes (Managed by JS) -->
+    <div id="notes-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
-    <p>
-      隨著傳統管樂團編制的縮減與轉型需求提升，<span class="highlight">爵士大樂團</span>正逐漸成為校園與社區音樂發展的新方向。
-      本次大師班由<span class="highlight">爵序大樂團</span>攜手<span class="highlight">旅美音樂教育家 陳含章博士</span>，以實作演練結合專業講評的方式，
-      帶領您深入探索爵士大樂團的指揮技巧與音樂核心。
-    </p>
+    <!-- Header / Hero Section -->
+    <header class="relative overflow-hidden pt-12 pb-16 px-4 text-center border-b-8 border-dashed border-[#FFB74D]">
+        <!-- Cute top banner flag/garland -->
+        <div class="flex justify-center gap-2 mb-6 select-none">
+            <span class="px-3 py-1 bg-[#FFD54F] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm">🎷 JAZZ</span>
+            <span class="px-3 py-1 bg-[#4FC3F7] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm text-white">✨ TAICHUNG</span>
+            <span class="px-3 py-1 bg-[#81C784] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm text-white">❤️ DREAM</span>
+        </div>
 
-    <ul>
-      <li><strong>📅 活動時間：</strong>2025年7月19日（六）下午 1:00－3:00</li>
-      <li><strong>📍 活動地點：</strong>MileSpace（台中市北區電台街1號，台中放送局內）</li>
-      <li><strong>👥 適合對象：</strong>音樂教師、指揮、樂團學生、爵士樂愛好者</li>
-      <li><strong>🎟 參加方式：</strong>現場旁聽 $350；接受指導 $2000（限額 2 名）<br>＊票價均包含現場 $150 酒水折抵</li>
-    </ul>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <!-- Decorative Instrument Badges -->
+            <div class="relative inline-block">
+                <span class="absolute -top-12 -left-12 text-5xl animate-bounce" style="animation-duration: 2s;">🎺</span>
+                <span class="absolute -bottom-6 -right-12 text-5xl animate-bounce" style="animation-duration: 2.5s;">🥁</span>
+                <h1 class="text-4xl md:text-6xl font-black tracking-wider leading-tight mb-4 drop-shadow-[0_2px_0px_rgba(255,255,255,1)]">
+                    成為我們的神隊友！<br>
+                    <span class="text-[#E65100] underline decoration-wavy decoration-[#FFB74D]">一起吹響台中的爵士夢</span>
+                </h1>
+            </div>
 
-    <p><strong>📌 活動特色：</strong></p>
-    <ul>
-      <li>✅ 實際站上指揮台，體驗爵士大樂團排練指導</li>
-      <li>✅ 陳含章博士一對一講評與指導</li>
-      <li>✅ 與爵序大樂團全編制現場互動演出</li>
-      <li>✅ 交流最新教學觀念與排練策略</li>
-    </ul>
+            <p class="text-lg md:text-2xl font-medium mt-6 text-[#7B5E57] max-w-2xl mx-auto px-4">
+                🎵 音樂這條路，熱情需要你灌溉。<br>我們想和你一起走得更遠、吹得更響亮！
+            </p>
 
-    <a class="btn" href="https://forms.gle/4JJ3hYeeAwB3ahxy9" target="_blank">立即報名</a>
-  </div>
+            <!-- Scroll CTA Button with Synth Windchime audio -->
+            <div class="mt-8">
+                <a href="#plans" onclick="playSparkle()" class="btn-bounce inline-flex items-center gap-2 px-8 py-4 bg-[#FF7043] hover:bg-[#FF8A65] text-white font-extrabold text-xl rounded-full text-shadow">
+                    看看我們的超棒方案 ⬇️
+                </a>
+            </div>
+        </div>
 
-  <div class="map">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.6217941591285!2d120.6884214111638!3d24.149916773230945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d403360afeb%3A0xad088d9f64d9eec6!2zTWlsZVNwYWNlIOmCgeeIvuaWr-eIteWjq-epuumWkw!5e0!3m2!1szh-TW!2stw!4v1747721840134!5m2!1szh-TW!2stw"
-      width="400"
-      height="300"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
+        <!-- Wave divider at bottom of header -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+            <svg class="relative block w-full h-[30px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,57.05,18.3,88.43,26.85,154.06,44.75,252.18,69.33,321.39,56.44Z" fill="#FFFDF0"></path>
+            </svg>
+        </div>
+    </header>
 
-  <script>
-    const countdown = document.getElementById('countdown');
-    const eventDate = new Date('2025-07-19T13:00:00+08:00').getTime();
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        
+        <!-- Band Leader's Letter Box -->
+        <section class="max-w-3xl mx-auto mb-16">
+            <div class="scrappy-card bg-white p-6 md:p-10 relative">
+                <!-- Cute paper clip decoration -->
+                <div class="absolute -top-6 left-12 w-10 h-14 bg-[#FFB74D] border-4 border-[#4E342E] rounded-xl flex items-center justify-center shadow-md select-none transform rotate-12">
+                    <span class="text-white font-bold text-xl">📌</span>
+                </div>
+                
+                <h3 class="text-2xl md:text-3xl font-black text-[#E65100] mb-6 flex items-center gap-2 pt-4">
+                    💬 來自團長的真心話
+                </h3>
+                
+                <div class="space-y-4 text-base md:text-lg leading-relaxed text-[#5D4037]">
+                    <p class="indent-8">
+                        相信大家都知道，在台灣成立一個文化團體，要生存真的非常困難。
+                        <strong class="text-[#E65100]">錢、人，通通都要到位</strong>，才有辦法撐起一場完整的演出。
+                        這些年來，我們樂團一直都在損益平衡的邊緣辛苦徘徊。
+                    </p>
+                    <p class="indent-8 font-black text-[#E65100] bg-[#FFFDE7] p-4 border-2 border-dashed border-[#FFE082] rounded-xl text-center shadow-inner my-4">
+                        💡 「所以我每天都在想：要怎麼樣，才能把這個樂團帶往更多、更遠的地方去演出？」
+                    </p>
+                    <p class="indent-8">
+                        經過了很長時間的精心規劃，我們推出了三個贊助與參與方案，希望邀請認同這個夢想的你，一起來當我們的神隊友！如果你也希望台中的爵士樂更熱鬧、更精彩，請來與我們同行！
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
+        <!-- Sponsor Plans Header -->
+        <section class="text-center mb-10">
+            <h2 id="plans" class="text-3xl md:text-4xl font-extrabold inline-block px-6 py-2 bg-[#FFEB3B] border-4 border-[#4E342E] rounded-full shadow-md transform -rotate-1">
+                👉 神隊友超讚應援方案 
+            </h2>
+            <p class="text-sm md:text-base mt-4 text-[#7B5E57]">選擇一項最適合你的方式，陪伴我們前行 💖</p>
+        </section>
 
-      if (distance <= 0) {
-        countdown.innerHTML = "活動已開始！";
-        return;
-      }
+        <!-- Plans Cards Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto items-stretch">
+            
+            <!-- Plan 1: Gold Member -->
+            <div class="scrappy-card bg-[#FFFDE7] p-6 flex flex-col justify-between border-4 border-[#4E342E]">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-4xl">💰</span>
+                        <span class="px-3 py-1 bg-[#FFE082] border-2 border-[#4E342E] rounded-full text-xs font-bold">圓夢舞台</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#F57C00] mb-2">方案一｜黃金團員</h3>
+                    <div class="text-3xl font-extrabold text-[#E65100] mb-4">
+                        $4,000 <span class="text-sm text-[#7B5E57] font-medium">/ 一期</span>
+                    </div>
+                    
+                    <p class="text-sm font-semibold text-[#8D6E63] bg-white border-2 border-dashed border-[#FFB74D] p-3 rounded-xl mb-6">
+                        ✨ 適合特別想上台圓夢、親身體驗大合奏快感的你！
+                    </p>
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    <ul class="space-y-3 text-left font-medium text-[#4E342E]">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 不規定你非得每次都來團練
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 自選想要來練團的時間 <strong class="text-[#E65100]">2 次</strong>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> <strong class="text-[#E65100] underline">直接跟我們一起上舞台正式演出！</strong>
+                        </li>
+                    </ul>
+                </div>
 
-      countdown.innerHTML = `距離活動開始倒數：${days} 天 ${hours} 小時 ${minutes} 分 ${seconds} 秒`;
-    }, 1000);
-  </script>
+                <div class="mt-8">
+                    <button onclick="openModal('💰 方案一｜黃金團員 ($4,000/期)', 4000)" class="btn-bounce w-full py-3 bg-[#FFB300] hover:bg-[#FFC107] text-white font-extrabold rounded-2xl text-lg">
+                        我想上台圓夢 ✨
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plan 2: Diamond Member -->
+            <div class="scrappy-card bg-[#E1F5FE] p-6 flex flex-col justify-between border-4 border-[#4E342E] relative transform md:scale-105">
+                <!-- Most Popular tag -->
+                <div class="absolute -top-5 right-6 bg-[#FF5722] text-white border-2 border-[#4E342E] px-3 py-1 rounded-full text-xs font-bold shadow-md animate-bounce">
+                    🔥 樂迷首選
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-4xl">💎</span>
+                        <span class="px-3 py-1 bg-[#90CAF9] border-2 border-[#4E342E] rounded-full text-xs font-bold">鐵粉專屬</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#0288D1] mb-2">方案二｜鑽石團員</h3>
+                    <div class="text-3xl font-extrabold text-[#0288D1] mb-4">
+                        $12,000 <span class="text-sm text-[#546E7A] font-medium">/ 一年</span>
+                    </div>
+                    
+                    <p class="text-sm font-semibold text-[#546E7A] bg-white border-2 border-dashed border-[#4FC3F7] p-3 rounded-xl mb-6">
+                        🎷 適合熱愛爵士的鐵粉，享受大樂團被音樂包圍的無壓氛圍！
+                    </p>
+
+                    <ul class="space-y-3 text-left font-medium text-[#4E342E]">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 一年兩次公演，每場各送 <strong class="text-[#0288D1]">2 張 VIP 票</strong> (共 4 張)
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 享有獨家 <strong class="text-red-500">購票 85 折優惠 🎟️</strong>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 各式大師與音樂講座免費入場
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 贈送專屬紀念 T-shirt <strong class="text-[#0288D1]">1 件</strong>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> <strong class="text-[#0288D1]">無限次來團練見習</strong> (免表演、無壓力體驗！)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="openModal('💎 方案二｜鑽石團員 ($12,000/年)', 12000)" class="btn-bounce w-full py-3 bg-[#29B6F6] hover:bg-[#4FC3F7] text-white font-extrabold rounded-2xl text-lg">
+                        成為鐵粉支持 💖
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plan 3: Corporate Sponsor -->
+            <div class="scrappy-card bg-[#E8F5E9] p-6 flex flex-col justify-between border-4 border-[#4E342E]">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-4xl">🏢</span>
+                        <span class="px-3 py-1 bg-[#A5D6A7] border-2 border-[#4E342E] rounded-full text-xs font-bold">企業攜手</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#388E3C] mb-2">方案三｜企業贊助方案</h3>
+                    <div class="text-3xl font-extrabold text-[#2E7D32] mb-4">
+                        $100,000 <span class="text-sm text-[#4E342E] font-medium">/ 一年</span>
+                    </div>
+                    
+                    <p class="text-sm font-semibold text-[#4E342E] bg-white border-2 border-dashed border-[#81C784] p-3 rounded-xl mb-6">
+                        🤝 適合熱心文化發展、希望回饋同仁或打造品牌價值的企業夥伴！
+                    </p>
+
+                    <ul class="space-y-3 text-left font-medium text-[#4E342E]">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 一年兩次公演，每場提供 <strong class="text-[#388E3C]">10 張 VIP 票</strong> (共 20 張)
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 各式講座與工作坊免費帶 <strong class="text-[#388E3C]">10 位同仁</strong> 來參與
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500">✔</span> 宣傳大露出 & YouTube 影片專屬品牌字樣
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#D84315]">★</span> <strong class="text-[#D84315]">獨家：一年一次免費企業包場演出！</strong> (尾牙/春酒免出樂團費)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="openModal('🏢 方案三｜企業贊助方案 ($100,000/年)', 100000)" class="btn-bounce w-full py-3 bg-[#66BB6A] hover:bg-[#81C784] text-white font-extrabold rounded-2xl text-lg">
+                        企業洽談合作 🏢
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Cute Jazz Atmosphere Play Board -->
+        <section class="max-w-xl mx-auto mb-16 text-center">
+            <div class="scrappy-card bg-[#FFF9C4] p-6 border-4 border-[#4E342E]">
+                <h4 class="font-black text-xl mb-3 flex items-center justify-center gap-2">
+                    🎹 聽聽我們的爵士和弦音效！
+                </h4>
+                <p class="text-sm text-[#7B5E57] mb-4">點擊下方彩色音效鍵，為辛苦練習的樂團打個氣！</p>
+                <div class="flex justify-center gap-3">
+                    <button onclick="playNote(261.63, 'brass')" class="btn-bounce w-12 h-12 bg-[#FF8A80] rounded-full text-white font-bold">C</button>
+                    <button onclick="playNote(293.66, 'brass')" class="btn-bounce w-12 h-12 bg-[#FFD180] rounded-full text-white font-bold">D</button>
+                    <button onclick="playNote(329.63, 'brass')" class="btn-bounce w-12 h-12 bg-[#FFE082] rounded-full text-white font-bold">E</button>
+                    <button onclick="playNote(349.23, 'brass')" class="btn-bounce w-12 h-12 bg-[#A5D6A7] rounded-full text-white font-bold">F</button>
+                    <button onclick="playNote(392.00, 'brass')" class="btn-bounce w-12 h-12 bg-[#80DEEA] rounded-full text-white font-bold">G</button>
+                    <button onclick="playNote(440.00, 'brass')" class="btn-bounce w-12 h-12 bg-[#90CAF9] rounded-full text-white font-bold">A</button>
+                    <button onclick="playNote(493.88, 'brass')" class="btn-bounce w-12 h-12 bg-[#B39DDB] rounded-full text-white font-bold">B</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#FFB74D] border-t-8 border-dashed border-[#FFF] text-white py-12 px-4 text-center relative z-10">
+        <div class="max-w-2xl mx-auto">
+            <span class="text-5xl animate-bounce inline-block mb-4">🎺💖🥁</span>
+            <h3 class="text-2xl md:text-3xl font-black mb-4">如果你也希望台中的爵士樂更熱鬧……</h3>
+            <p class="text-sm md:text-lg opacity-90 mb-8 max-w-lg mx-auto">
+                歡迎直接私訊我聊聊，或者幫我把這個消息分享給身邊可能感興趣的朋友或企業同好！
+            </p>
+            <p class="text-xl md:text-2xl font-black italic bg-[#E65100] inline-block px-6 py-3 rounded-full border-2 border-white shadow-md mb-8">
+                「音樂這條路，我想跟你們一起走得更遠。🥰」
+            </p>
+
+            <!-- Bottom CTA Group -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="openModal('💬 與團長私訊聊聊', 0)" class="btn-bounce px-8 py-3 bg-white text-[#E65100] font-extrabold rounded-full text-lg flex items-center gap-2">
+                    💬 與團長聊一聊
+                </button>
+                <button onclick="shareLink()" class="btn-bounce px-8 py-3 bg-[#4E342E] text-white font-extrabold rounded-full text-lg flex items-center gap-2">
+                    📢 分享這個好夢想
+                </button>
+            </div>
+            
+            <p class="text-xs opacity-75 mt-12 font-medium">
+                © 2026 台中爵士大樂團. All dreams are protected with melody and hope. 🌟
+            </p>
+        </div>
+    </footer>
+
+    <!-- Beautiful Cute Interactive Modal -->
+    <div id="inquiryModal" class="fixed inset-0 bg-[#4E342E]/70 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl border-4 border-[#4E342E] max-w-lg w-full p-6 md:p-8 scrappy-card transform scale-90 transition-transform duration-300 relative">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute -top-3 -right-3 w-10 h-10 bg-red-400 hover:bg-red-500 border-2 border-[#4E342E] rounded-full flex items-center justify-center text-white font-bold shadow-md">
+                ✖
+            </button>
+
+            <div class="text-center">
+                <span id="modalEmoji" class="text-5xl">💝</span>
+                <h3 class="text-2xl font-black text-[#E65100] mt-3" id="modalTitle">我想諮詢支持方案</h3>
+                <p class="text-sm text-[#7B5E57] mt-1">填寫您的聯繫方式，我們會立即私訊為您說明細節喔！</p>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="modalForm" onsubmit="handleFormSubmit(event)" class="mt-6 space-y-4">
+                <input type="hidden" id="selectedPlan" name="selectedPlan">
+                
+                <div>
+                    <label class="block text-sm font-bold text-[#4E342E] mb-1">您的暱稱 / 稱呼 *</label>
+                    <input type="text" required class="w-full px-4 py-2 border-2 border-[#4E342E] rounded-xl focus:ring-2 focus:ring-[#FFB74D] outline-none" placeholder="例如：愛爵士的小王">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-[#4E342E] mb-1">聯繫手機 / Line ID *</label>
+                    <input type="text" required class="w-full px-4 py-2 border-2 border-[#4E342E] rounded-xl focus:ring-2 focus:ring-[#FFB74D] outline-none" placeholder="如：Line ID 或 手機號碼">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-[#4E342E] mb-1">想要詢問的問題或想說的話 (選填)</label>
+                    <textarea class="w-full px-4 py-2 border-2 border-[#4E342E] rounded-xl focus:ring-2 focus:ring-[#FFB74D] outline-none h-20 resize-none" placeholder="有什麼悄悄話想跟團長說呢？"></textarea>
+                </div>
+
+                <button type="submit" class="btn-bounce w-full py-3 bg-[#FF7043] hover:bg-[#FF8A65] text-white font-extrabold rounded-xl text-lg">
+                    送出並與團長對話 🚀
+                </button>
+            </form>
+
+            <!-- Thank you note -->
+            <div id="successContent" class="hidden text-center py-6">
+                <span class="text-6xl">🎉</span>
+                <h4 class="text-2xl font-bold text-green-600 mt-4">送出成功！神隊友！</h4>
+                <p class="text-[#5D4037] mt-2">太感謝你了！我們已經將訊息傳給團長，將儘快與你取得聯絡 🎷</p>
+                <button onclick="closeModal()" class="btn-bounce mt-6 px-6 py-2 bg-[#4E342E] text-white font-bold rounded-xl">
+                    關閉視窗
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cute Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 px-6 py-3 bg-[#4FC3F7] text-[#4E342E] border-4 border-[#4E342E] rounded-full shadow-lg font-bold z-50 hidden opacity-0 transition-opacity duration-300">
+        ✨ 成功複製推廣網址！趕快分享給朋友吧 🎷
+    </div>
+
+    <script>
+        // --- Web Audio API Synth Notes ---
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Play musical notes dynamically
+        function playNote(frequency, type = 'brass') {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.value = frequency;
+                
+                if (type === 'brass') {
+                    // Triangle wave is softer and cuter, like brass
+                    osc.type = 'triangle';
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                    osc.start(audioCtx.currentTime);
+                    osc.stop(audioCtx.currentTime + 0.5);
+                } else if (type === 'sparkle') {
+                    // High pitch sine bell sound
+                    osc.type = 'sine';
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                    osc.start(audioCtx.currentTime);
+                    osc.stop(audioCtx.currentTime + 0.8);
+                }
+            } catch (e) {
+                console.log("Audio couldn't start because of browser limitations.");
+            }
+        }
+
+        function playSparkle() {
+            playNote(523.25, 'sparkle'); // C5
+            setTimeout(() => playNote(659.25, 'sparkle'), 100); // E5
+            setTimeout(() => playNote(783.99, 'sparkle'), 200); // G5
+        }
+
+        // --- Floating Music Notes background Generator ---
+        const notes = ['🎵', '🎶', '🎷', '🎺', '🎹', '❤️', '🌟'];
+        const notesContainer = document.getElementById('notes-container');
+
+        function createFloatingNote() {
+            const note = document.createElement('div');
+            note.className = 'floating-note';
+            note.innerText = notes[Math.floor(Math.random() * notes.length)];
+            note.style.left = Math.random() * 95 + 'vw';
+            
+            // Random size & speed
+            const size = Math.random() * 20 + 20;
+            note.style.fontSize = size + 'px';
+            
+            const duration = Math.random() * 6 + 8; // 8 to 14 seconds
+            note.style.animationDuration = duration + 's';
+            
+            notesContainer.appendChild(note);
+
+            // Cleanup
+            setTimeout(() => {
+                note.remove();
+            }, duration * 1000);
+        }
+
+        // Generate notes periodically
+        setInterval(createFloatingNote, 1500);
+        // Pre-populate some
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingNote, i * 600);
+        }
+
+        // --- Interactive Modals ---
+        const modal = document.getElementById('inquiryModal');
+        const modalContent = modal.querySelector('.scrappy-card');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalEmoji = document.getElementById('modalEmoji');
+        const selectedPlanInput = document.getElementById('selectedPlan');
+        const modalForm = document.getElementById('modalForm');
+        const successContent = document.getElementById('successContent');
+
+        function openModal(planName, price) {
+            playSparkle();
+            selectedPlanInput.value = planName;
+            
+            // Customize modal look based on plan
+            if (planName.includes('黃金')) {
+                modalEmoji.innerText = '💰';
+                modalTitle.innerText = '我想圓夢：' + planName;
+            } else if (planName.includes('鑽石')) {
+                modalEmoji.innerText = '💎';
+                modalTitle.innerText = '加入鐵粉：' + planName;
+            } else if (planName.includes('企業')) {
+                modalEmoji.innerText = '🏢';
+                modalTitle.innerText = '企業攜手：' + planName;
+            } else {
+                modalEmoji.innerText = '💬';
+                modalTitle.innerText = '與團長私訊聊聊';
+            }
+
+            modalForm.classList.remove('hidden');
+            successContent.classList.add('hidden');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-90');
+            }, 50);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-90');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            playSparkle();
+            // Perform fake API request
+            modalForm.classList.add('hidden');
+            successContent.classList.remove('hidden');
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- Clipboard Sharing ---
+        function shareLink() {
+            playSparkle();
+            const dummy = document.createElement('textarea');
+            document.body.appendChild(dummy);
+            dummy.value = `🎺 台中爵士大樂團招募神隊友啦！\n這裡有「圓夢上台演出」、「超值樂迷尊榮見習」與「專屬企業包場」三大應援好康方案，一起把台中的爵士吹得又響又熱鬧！\n✨ 快來當我們的神隊友 👉 ${window.location.href}`;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            // Pop toast
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 300);
+            }, 4000);
+        }
+    </script>
 </body>
 </html>

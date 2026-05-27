@@ -12,13 +12,12 @@
     <style>
         body {
             font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
-            background-color: #FFFDF0; /* Warm light yellow custard background */
+            background-color: #FFFDF0;
             background-image: radial-gradient(#FCE4EC 1.5px, transparent 1.5px), radial-gradient(#FCE4EC 1.5px, #FFFDF0 1.5px);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
         }
 
-        /* Handwritten doodle card effect */
         .scrappy-card {
             border: 4px solid #4E342E;
             box-shadow: 6px 6px 0px 0px #4E342E;
@@ -31,7 +30,6 @@
             box-shadow: 10px 10px 0px 0px #4E342E;
         }
 
-        /* Q-bounce effect for cute buttons */
         .btn-bounce {
             border: 3px solid #4E342E;
             box-shadow: 4px 4px 0px 0px #4E342E;
@@ -48,18 +46,13 @@
             box-shadow: 1px 1px 0px 0px #4E342E;
         }
 
-        /* Floating Note Animation in Background */
         @keyframes floatUp {
             0% {
                 transform: translateY(100vh) translateX(0px) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
             100% {
                 transform: translateY(-10vh) translateX(100px) rotate(360deg);
                 opacity: 0;
@@ -75,36 +68,68 @@
             animation: floatUp 12s linear infinite;
         }
 
-        /* Custom scrollbar for cute look */
-        ::-webkit-scrollbar {
-            width: 12px;
+        /* Logo glow animation */
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 183, 77, 0.6)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 183, 77, 1)); }
         }
-        ::-webkit-scrollbar-track {
-            background: #FFFDE7;
+
+        .logo-glow {
+            animation: logoGlow 3s ease-in-out infinite;
         }
+
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #FFFDE7; }
         ::-webkit-scrollbar-thumb {
             background-color: #FFB74D;
             border-radius: 10px;
             border: 3px solid #FFFDE7;
         }
+
+        /* Plan button Google Form link style */
+        .plan-form-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden text-[#4E342E] relative min-h-screen">
 
-    <!-- Floating background decorative notes (Managed by JS) -->
-    <div id="notes-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+    <!-- Floating background decorative notes -->
+    <div id="notes-container" class="fixed inset-0 overflow-hidden pointer-events-none" style="z-index:1;"></div>
 
     <!-- Header / Hero Section -->
-    <header class="relative overflow-hidden pt-12 pb-16 px-4 text-center border-b-8 border-dashed border-[#FFB74D]">
-        <!-- Cute top banner flag/garland -->
-        <div class="flex justify-center gap-2 mb-6 select-none">
+    <header class="relative overflow-hidden pt-8 pb-16 px-4 text-center border-b-8 border-dashed border-[#FFB74D]" style="z-index:10; position:relative;">
+        
+        <!-- ===== LOGO AREA ===== -->
+        <div class="flex justify-center mb-6">
+            <div class="relative inline-block">
+                <!-- Logo background halo -->
+                <div class="absolute inset-0 bg-[#FFE082] rounded-full blur-2xl opacity-60 scale-110"></div>
+                <img 
+                    src="https://i.imgur.com/21xz19M.png" 
+                    alt="台中爵士大樂團 Logo" 
+                    class="logo-glow relative z-10 w-36 h-36 md:w-48 md:h-48 object-contain rounded-full border-4 border-[#4E342E] bg-white shadow-2xl"
+                    onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';"
+                />
+                <!-- Fallback if image fails to load -->
+                <div id="logo-fallback" class="hidden w-36 h-36 md:w-48 md:h-48 items-center justify-center bg-[#FFE082] border-4 border-[#4E342E] rounded-full text-6xl shadow-2xl">
+                    🎷
+                </div>
+            </div>
+        </div>
+
+        <!-- Cute top banner tags -->
+        <div class="flex justify-center gap-2 mb-6 select-none flex-wrap">
             <span class="px-3 py-1 bg-[#FFD54F] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm">🎷 JAZZ</span>
             <span class="px-3 py-1 bg-[#4FC3F7] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm text-white">✨ TAICHUNG</span>
             <span class="px-3 py-1 bg-[#81C784] border-2 border-[#4E342E] rounded-full text-xs font-bold shadow-sm text-white">❤️ DREAM</span>
         </div>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <!-- Decorative Instrument Badges -->
             <div class="relative inline-block">
                 <span class="absolute -top-12 -left-12 text-5xl animate-bounce" style="animation-duration: 2s;">🎺</span>
                 <span class="absolute -bottom-6 -right-12 text-5xl animate-bounce" style="animation-duration: 2.5s;">🥁</span>
@@ -118,29 +143,27 @@
                 🎵 音樂這條路，熱情需要你灌溉。<br>我們想和你一起走得更遠、吹得更響亮！
             </p>
 
-            <!-- Scroll CTA Button with Synth Windchime audio -->
             <div class="mt-8">
-                <a href="#plans" onclick="playSparkle()" class="btn-bounce inline-flex items-center gap-2 px-8 py-4 bg-[#FF7043] hover:bg-[#FF8A65] text-white font-extrabold text-xl rounded-full text-shadow">
+                <a href="#plans" onclick="playSparkle()" class="btn-bounce inline-flex items-center gap-2 px-8 py-4 bg-[#FF7043] hover:bg-[#FF8A65] text-white font-extrabold text-xl rounded-full">
                     看看我們的超棒方案 ⬇️
                 </a>
             </div>
         </div>
 
-        <!-- Wave divider at bottom of header -->
+        <!-- Wave divider -->
         <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-            <svg class="relative block w-full h-[30px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <svg class="relative block w-full h-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,57.05,18.3,88.43,26.85,154.06,44.75,252.18,69.33,321.39,56.44Z" fill="#FFFDF0"></path>
             </svg>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="container mx-auto px-4 py-12 relative z-10">
+    <main class="container mx-auto px-4 py-12 relative" style="z-index:10;">
         
         <!-- Band Leader's Letter Box -->
         <section class="max-w-3xl mx-auto mb-16">
             <div class="scrappy-card bg-white p-6 md:p-10 relative">
-                <!-- Cute paper clip decoration -->
                 <div class="absolute -top-6 left-12 w-10 h-14 bg-[#FFB74D] border-4 border-[#4E342E] rounded-xl flex items-center justify-center shadow-md select-none transform rotate-12">
                     <span class="text-white font-bold text-xl">📌</span>
                 </div>
@@ -205,15 +228,32 @@
                     </ul>
                 </div>
 
-                <div class="mt-8">
-                    <button onclick="openModal('💰 方案一｜黃金團員 ($4,000/期)', 4000)" class="btn-bounce w-full py-3 bg-[#FFB300] hover:bg-[#FFC107] text-white font-extrabold rounded-2xl text-lg">
-                        我想上台圓夢 ✨
-                    </button>
+                <div class="mt-8 flex flex-col gap-3">
+                    <!-- Primary: Google Form link -->
+                    <a 
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce plan-form-link py-3 bg-[#FFB300] hover:bg-[#FFC107] text-white font-extrabold rounded-2xl text-lg"
+                    >
+                        <span>📋 填寫報名表單</span>
+                    </a>
+                    <!-- Secondary: messenger inquiry -->
+                    <a 
+                        href="https://m.me/104525919392665"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce w-full py-2 bg-white hover:bg-[#FFF8E1] text-[#F57C00] font-bold rounded-2xl text-base flex items-center justify-center gap-2"
+                    >
+                        💬 想先詢問細節
+                    </a>
                 </div>
             </div>
 
             <!-- Plan 2: Diamond Member -->
-            <div class="scrappy-card bg-[#E1F5FE] p-6 flex flex-col justify-between border-4 border-[#4E342E] relative transform md:scale-105">
+            <div class="scrappy-card bg-[#E1F5FE] p-6 flex flex-col justify-between border-4 border-[#4E342E] relative md:scale-105">
                 <!-- Most Popular tag -->
                 <div class="absolute -top-5 right-6 bg-[#FF5722] text-white border-2 border-[#4E342E] px-3 py-1 rounded-full text-xs font-bold shadow-md animate-bounce">
                     🔥 樂迷首選
@@ -252,10 +292,25 @@
                     </ul>
                 </div>
 
-                <div class="mt-8">
-                    <button onclick="openModal('💎 方案二｜鑽石團員 ($12,000/年)', 12000)" class="btn-bounce w-full py-3 bg-[#29B6F6] hover:bg-[#4FC3F7] text-white font-extrabold rounded-2xl text-lg">
-                        成為鐵粉支持 💖
-                    </button>
+                <div class="mt-8 flex flex-col gap-3">
+                    <a 
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce plan-form-link py-3 bg-[#29B6F6] hover:bg-[#4FC3F7] text-white font-extrabold rounded-2xl text-lg"
+                    >
+                        <span>📋 填寫報名表單</span>
+                    </a>
+                    <a 
+                        href="https://m.me/104525919392665"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce w-full py-2 bg-white hover:bg-[#E1F5FE] text-[#0288D1] font-bold rounded-2xl text-base flex items-center justify-center gap-2"
+                    >
+                        💬 想先詢問細節
+                    </a>
                 </div>
             </div>
 
@@ -291,10 +346,25 @@
                     </ul>
                 </div>
 
-                <div class="mt-8">
-                    <button onclick="openModal('🏢 方案三｜企業贊助方案 ($100,000/年)', 100000)" class="btn-bounce w-full py-3 bg-[#66BB6A] hover:bg-[#81C784] text-white font-extrabold rounded-2xl text-lg">
-                        企業洽談合作 🏢
-                    </button>
+                <div class="mt-8 flex flex-col gap-3">
+                    <a 
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce plan-form-link py-3 bg-[#66BB6A] hover:bg-[#81C784] text-white font-extrabold rounded-2xl text-lg"
+                    >
+                        <span>📋 填寫報名表單</span>
+                    </a>
+                    <a 
+                        href="https://m.me/104525919392665"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="playSparkle()"
+                        class="btn-bounce w-full py-2 bg-white hover:bg-[#E8F5E9] text-[#388E3C] font-bold rounded-2xl text-base flex items-center justify-center gap-2"
+                    >
+                        💬 想先詢問細節
+                    </a>
                 </div>
             </div>
 
@@ -307,7 +377,7 @@
                     🎹 聽聽我們的爵士和弦音效！
                 </h4>
                 <p class="text-sm text-[#7B5E57] mb-4">點擊下方彩色音效鍵，為辛苦練習的樂團打個氣！</p>
-                <div class="flex justify-center gap-3">
+                <div class="flex justify-center gap-3 flex-wrap">
                     <button onclick="playNote(261.63, 'brass')" class="btn-bounce w-12 h-12 bg-[#FF8A80] rounded-full text-white font-bold">C</button>
                     <button onclick="playNote(293.66, 'brass')" class="btn-bounce w-12 h-12 bg-[#FFD180] rounded-full text-white font-bold">D</button>
                     <button onclick="playNote(329.63, 'brass')" class="btn-bounce w-12 h-12 bg-[#FFE082] rounded-full text-white font-bold">E</button>
@@ -322,8 +392,18 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-[#FFB74D] border-t-8 border-dashed border-[#FFF] text-white py-12 px-4 text-center relative z-10">
+    <footer class="bg-[#FFB74D] border-t-8 border-dashed border-[#FFF] text-white py-12 px-4 text-center relative" style="z-index:10;">
         <div class="max-w-2xl mx-auto">
+            <!-- Logo in footer -->
+            <div class="flex justify-center mb-6">
+                <img 
+                    src="https://i.imgur.com/21xz19M.png" 
+                    alt="台中爵士大樂團 Logo" 
+                    class="w-20 h-20 object-contain rounded-full border-4 border-white bg-white shadow-lg"
+                    onerror="this.style.display='none';"
+                />
+            </div>
+
             <span class="text-5xl animate-bounce inline-block mb-4">🎺💖🥁</span>
             <h3 class="text-2xl md:text-3xl font-black mb-4">如果你也希望台中的爵士樂更熱鬧……</h3>
             <p class="text-sm md:text-lg opacity-90 mb-8 max-w-lg mx-auto">
@@ -335,25 +415,74 @@
 
             <!-- Bottom CTA Group -->
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button onclick="openModal('💬 與團長私訊聊聊', 0)" class="btn-bounce px-8 py-3 bg-white text-[#E65100] font-extrabold rounded-full text-lg flex items-center gap-2">
+                <!-- Direct to Google Form -->
+                <a 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick="playSparkle()"
+                    class="btn-bounce px-8 py-3 bg-white text-[#E65100] font-extrabold rounded-full text-lg flex items-center gap-2"
+                >
+                    📋 立即填寫報名表單
+                </a>
+                <a 
+                    href="https://m.me/104525919392665"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick="playSparkle()"
+                    class="btn-bounce px-8 py-3 bg-[#E65100] text-white font-extrabold rounded-full text-lg flex items-center gap-2"
+                >
                     💬 與團長聊一聊
-                </button>
+                </a>
                 <button onclick="shareLink()" class="btn-bounce px-8 py-3 bg-[#4E342E] text-white font-extrabold rounded-full text-lg flex items-center gap-2">
                     📢 分享這個好夢想
                 </button>
             </div>
             
-            <p class="text-xs opacity-75 mt-12 font-medium">
+            <!-- Social Media Links -->
+            <div class="flex flex-wrap justify-center items-center gap-3 mt-10 mb-6">
+                <a 
+                    href="https://www.instagram.com/taichung_jazzship_orchestra?igsh=MWNrdmM1eGplYTM4Zw%3D%3D&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn flex items-center gap-2 px-5 py-3 rounded-2xl text-white font-bold text-sm shadow-lg"
+                    style="background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: 3px solid white;"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    Instagram
+                </a>
+                <a 
+                    href="https://www.facebook.com/share/1DcBjgzhwB/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn flex items-center gap-2 px-5 py-3 rounded-2xl text-white font-bold text-sm shadow-lg"
+                    style="background-color: #1877F2; border: 3px solid white;"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a 
+                    href="https://m.me/104525919392665"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn flex items-center gap-2 px-5 py-3 rounded-2xl text-white font-bold text-sm shadow-lg"
+                    style="background: linear-gradient(135deg, #00B2FF, #006AFF); border: 3px solid white;"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.683V24l4.088-2.242c1.092.3 2.246.464 3.443.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/></svg>
+                    Messenger
+                </a>
+            </div>
+
+            <p class="text-xs opacity-75 mt-4 font-medium">
                 © 2026 台中爵士大樂團. All dreams are protected with melody and hope. 🌟
             </p>
         </div>
     </footer>
 
-    <!-- Beautiful Cute Interactive Modal -->
+    <!-- Inquiry Modal -->
     <div id="inquiryModal" class="fixed inset-0 bg-[#4E342E]/70 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl border-4 border-[#4E342E] max-w-lg w-full p-6 md:p-8 scrappy-card transform scale-90 transition-transform duration-300 relative">
             
-            <!-- Close Button -->
             <button onclick="closeModal()" class="absolute -top-3 -right-3 w-10 h-10 bg-red-400 hover:bg-red-500 border-2 border-[#4E342E] rounded-full flex items-center justify-center text-white font-bold shadow-md">
                 ✖
             </button>
@@ -364,8 +493,21 @@
                 <p class="text-sm text-[#7B5E57] mt-1">填寫您的聯繫方式，我們會立即私訊為您說明細節喔！</p>
             </div>
 
+            <!-- Prompt to go to form -->
+            <div class="mt-6 p-4 bg-[#FFFDE7] border-2 border-dashed border-[#FFB74D] rounded-xl text-center">
+                <p class="text-sm font-bold text-[#7B5E57] mb-3">💡 您也可以直接前往報名表單，更快速完成登記！</p>
+                <a 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-bounce inline-flex items-center gap-2 px-5 py-2 bg-[#FF7043] text-white font-extrabold rounded-xl text-sm"
+                >
+                    📋 前往 Google 報名表單 ↗
+                </a>
+            </div>
+
             <!-- Modal Form -->
-            <form id="modalForm" onsubmit="handleFormSubmit(event)" class="mt-6 space-y-4">
+            <form id="modalForm" onsubmit="handleFormSubmit(event)" class="mt-5 space-y-4">
                 <input type="hidden" id="selectedPlan" name="selectedPlan">
                 
                 <div>
@@ -393,20 +535,29 @@
                 <span class="text-6xl">🎉</span>
                 <h4 class="text-2xl font-bold text-green-600 mt-4">送出成功！神隊友！</h4>
                 <p class="text-[#5D4037] mt-2">太感謝你了！我們已經將訊息傳給團長，將儘快與你取得聯絡 🎷</p>
-                <button onclick="closeModal()" class="btn-bounce mt-6 px-6 py-2 bg-[#4E342E] text-white font-bold rounded-xl">
+                <a 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfbyvAoeIMPRTxcgdZQ8HWjTmSviCPtmU0CejbVha6dCwHv_A/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-bounce mt-4 inline-flex items-center gap-2 px-5 py-2 bg-[#FF7043] text-white font-extrabold rounded-xl text-sm"
+                >
+                    📋 也填寫正式報名表單 ↗
+                </a>
+                <br>
+                <button onclick="closeModal()" class="btn-bounce mt-4 px-6 py-2 bg-[#4E342E] text-white font-bold rounded-xl">
                     關閉視窗
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Cute Toast Notification -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 right-6 px-6 py-3 bg-[#4FC3F7] text-[#4E342E] border-4 border-[#4E342E] rounded-full shadow-lg font-bold z-50 hidden opacity-0 transition-opacity duration-300">
         ✨ 成功複製推廣網址！趕快分享給朋友吧 🎷
     </div>
 
     <script>
-        // --- Web Audio API Synth Notes ---
+        // --- Web Audio API ---
         let audioCtx = null;
 
         function initAudio() {
@@ -415,27 +566,22 @@
             }
         }
 
-        // Play musical notes dynamically
         function playNote(frequency, type = 'brass') {
             try {
                 initAudio();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                
                 osc.frequency.value = frequency;
                 
                 if (type === 'brass') {
-                    // Triangle wave is softer and cuter, like brass
                     osc.type = 'triangle';
                     gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
                     osc.start(audioCtx.currentTime);
                     osc.stop(audioCtx.currentTime + 0.5);
                 } else if (type === 'sparkle') {
-                    // High pitch sine bell sound
                     osc.type = 'sine';
                     gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
@@ -443,17 +589,17 @@
                     osc.stop(audioCtx.currentTime + 0.8);
                 }
             } catch (e) {
-                console.log("Audio couldn't start because of browser limitations.");
+                console.log("Audio couldn't start.");
             }
         }
 
         function playSparkle() {
-            playNote(523.25, 'sparkle'); // C5
-            setTimeout(() => playNote(659.25, 'sparkle'), 100); // E5
-            setTimeout(() => playNote(783.99, 'sparkle'), 200); // G5
+            playNote(523.25, 'sparkle');
+            setTimeout(() => playNote(659.25, 'sparkle'), 100);
+            setTimeout(() => playNote(783.99, 'sparkle'), 200);
         }
 
-        // --- Floating Music Notes background Generator ---
+        // --- Floating Music Notes ---
         const notes = ['🎵', '🎶', '🎷', '🎺', '🎹', '❤️', '🌟'];
         const notesContainer = document.getElementById('notes-container');
 
@@ -462,30 +608,20 @@
             note.className = 'floating-note';
             note.innerText = notes[Math.floor(Math.random() * notes.length)];
             note.style.left = Math.random() * 95 + 'vw';
-            
-            // Random size & speed
             const size = Math.random() * 20 + 20;
             note.style.fontSize = size + 'px';
-            
-            const duration = Math.random() * 6 + 8; // 8 to 14 seconds
+            const duration = Math.random() * 6 + 8;
             note.style.animationDuration = duration + 's';
-            
             notesContainer.appendChild(note);
-
-            // Cleanup
-            setTimeout(() => {
-                note.remove();
-            }, duration * 1000);
+            setTimeout(() => note.remove(), duration * 1000);
         }
 
-        // Generate notes periodically
         setInterval(createFloatingNote, 1500);
-        // Pre-populate some
         for (let i = 0; i < 5; i++) {
             setTimeout(createFloatingNote, i * 600);
         }
 
-        // --- Interactive Modals ---
+        // --- Modals ---
         const modal = document.getElementById('inquiryModal');
         const modalContent = modal.querySelector('.scrappy-card');
         const modalTitle = document.getElementById('modalTitle');
@@ -498,7 +634,6 @@
             playSparkle();
             selectedPlanInput.value = planName;
             
-            // Customize modal look based on plan
             if (planName.includes('黃金')) {
                 modalEmoji.innerText = '💰';
                 modalTitle.innerText = '我想圓夢：' + planName;
@@ -515,7 +650,6 @@
 
             modalForm.classList.remove('hidden');
             successContent.classList.add('hidden');
-
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
@@ -534,40 +668,43 @@
         function handleFormSubmit(e) {
             e.preventDefault();
             playSparkle();
-            // Perform fake API request
             modalForm.classList.add('hidden');
             successContent.classList.remove('hidden');
         }
 
-        // Close on backdrop click
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === modal) closeModal();
         });
 
         // --- Clipboard Sharing ---
         function shareLink() {
             playSparkle();
+            const text = `🎺 台中爵士大樂團招募神隊友啦！\n這裡有「圓夢上台演出」、「超值樂迷尊榮見習」與「專屬企業包場」三大應援好康方案，一起把台中的爵士吹得又響又熱鬧！\n✨ 快來當我們的神隊友 👉 ${window.location.href}`;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
             const dummy = document.createElement('textarea');
             document.body.appendChild(dummy);
-            dummy.value = `🎺 台中爵士大樂團招募神隊友啦！\n這裡有「圓夢上台演出」、「超值樂迷尊榮見習」與「專屬企業包場」三大應援好康方案，一起把台中的爵士吹得又響又熱鬧！\n✨ 快來當我們的神隊友 👉 ${window.location.href}`;
+            dummy.value = text;
             dummy.select();
             document.execCommand('copy');
             document.body.removeChild(dummy);
+            showToast();
+        }
 
-            // Pop toast
+        function showToast() {
             const toast = document.getElementById('toast');
             toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.remove('opacity-0');
-            }, 50);
-
+            setTimeout(() => toast.classList.remove('opacity-0'), 50);
             setTimeout(() => {
                 toast.classList.add('opacity-0');
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 300);
+                setTimeout(() => toast.classList.add('hidden'), 300);
             }, 4000);
         }
     </script>
